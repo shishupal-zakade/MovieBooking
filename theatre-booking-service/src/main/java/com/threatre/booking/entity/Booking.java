@@ -39,11 +39,24 @@ public class Booking {
 
 	@JdbcTypeCode(SqlTypes.JSON)
 	@Column(name = "seat_row_numbers")
-	private List<Map<String, Integer>> seatRowNumbers;
+	private Map<String, Integer> seatRowNumber;
 	
 	public Booking() {
 		super();
 	}
+
+	public Booking(Integer id, String theatreId, String movieId, Date date, String showId, String status,
+			Map<String, Integer> seatRowNumbers) {
+		super();
+		this.id = id;
+		this.theatreId = theatreId;
+		this.movieId = movieId;
+		this.date = date;
+		this.showId = showId;
+		this.status = status;
+		this.seatRowNumber = seatRowNumbers;
+	}
+
 
 	/**
 	 * @return the id
@@ -124,19 +137,7 @@ public class Booking {
 		this.showId = showId;
 	}
 
-	/**
-	 * @return the seatRowNumbers
-	 */
-	public List<Map<String, Integer>> getSeatRowNumbers() {
-		return seatRowNumbers;
-	}
-
-	/**
-	 * @param seatRowNumbers the seatRowNumbers to set
-	 */
-	public void setSeatRowNumbers(List<Map<String, Integer>> seatRowNumbers) {
-		this.seatRowNumbers = seatRowNumbers;
-	}
+	 
 
 	/**
 	 * @param status the status to set
@@ -145,16 +146,20 @@ public class Booking {
 		this.status = status;
 	}
 
-	public Booking(Integer id, String theatreId, String movieId, Date date, String showId, String status,
-			List<Map<String, Integer>> seatRowNumbers) {
-		super();
-		this.id = id;
-		this.theatreId = theatreId;
-		this.movieId = movieId;
-		this.date = date;
-		this.showId = showId;
-		this.status = status;
-		this.seatRowNumbers = seatRowNumbers;
+	 
+ 
+	/**
+	 * @return the seatRowNumber
+	 */
+	public Map<String, Integer> getSeatRowNumber() {
+		return seatRowNumber;
+	}
+
+	/**
+	 * @param seatRowNumber the seatRowNumber to set
+	 */
+	public void setSeatRowNumber(Map<String, Integer> seatRowNumber) {
+		this.seatRowNumber = seatRowNumber;
 	}
 
 	@Override

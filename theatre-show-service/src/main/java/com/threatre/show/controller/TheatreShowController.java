@@ -19,34 +19,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.threatre.show.entity.Show;
-import com.threatre.show.repository.ShowRepository;
+import com.threatre.show.service.ShowService;
 
 @RestController
 @RequestMapping("/theatre/show")
 public class TheatreShowController {
 
 	@Autowired
-	ShowRepository showRepository;
+	ShowService showService;
 
 	@PostMapping(value = "/create", consumes = { "application/json" })
 	public ResponseEntity<?> createShow(@RequestBody Show show) {
-		return ResponseEntity.status(HttpStatus.OK).body(showRepository.save(show));
+		return ResponseEntity.status(HttpStatus.OK).body(showService.createShow(show));
 	}
 
 	@PostMapping(value = "/update", consumes = { "application/json" })
 	public ResponseEntity<?> updateShow(@RequestBody Show show) {
-		return ResponseEntity.status(HttpStatus.OK).body(showRepository.save(show));
+		return ResponseEntity.status(HttpStatus.OK).body(showService.updateShow(show));
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
 	public ResponseEntity<?> deleteShow(@PathVariable Integer id) {
-		showRepository.deleteById(id);
+		showService.deleteShow(id);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 
 	@GetMapping("/getRunningShow")
 	public List<Show> getRunningShow() {
-		return showRepository.findByShowStartTimeLessThanAndShowEndtimeGreaterThan(
+		return showService.findByShowStartTimeLessThanAndShowEndtimeGreaterThan(
 				Timestamp.from(ZonedDateTime.now().toInstant()), Timestamp.from(ZonedDateTime.now().toInstant()));
 	}
 	
@@ -58,14 +58,14 @@ public class TheatreShowController {
 		}else {
 			ts = Timestamp.valueOf(LocalDateTime.parse(date));
 		}
-		return showRepository.findByMovieIdAndShowStartTimeLessThanAndShowEndtimeGreaterThan(movieId, ts, ts);
+		return showService.findByMovieIdAndShowStartTimeLessThanAndShowEndtimeGreaterThan(movieId, ts, ts);
 	}
 
 	@GetMapping("/getAll")
 	public List<Show> test() {
 		System.out.println("LocalTime.now() -" + LocalTime.now());
 		System.out.println("LocalTime.now() -" + Timestamp.from(ZonedDateTime.now().toInstant()));
-		return showRepository.findAll();
+		return showService.findAll();
 	}
 	
 }

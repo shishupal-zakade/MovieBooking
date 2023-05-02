@@ -1,7 +1,5 @@
 package com.threatre.booking.controller;
 
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.threatre.booking.entity.Booking;
+import com.threatre.booking.exception.BookingAlreadyExistsException;
 import com.threatre.booking.service.BookingService;
 
 @RestController
@@ -24,8 +23,13 @@ public class TheatreBookingController {
 	BookingService bookingService;
 
 	@PostMapping(value = "/book", consumes = { "application/json" })
-	public ResponseEntity<?> createBooking(@RequestBody Booking booking) {
+	public ResponseEntity<?> createBooking(@RequestBody Booking booking) throws BookingAlreadyExistsException {
 		return ResponseEntity.status(HttpStatus.OK).body(bookingService.createBooking(booking));
+	}
+	
+	@PostMapping(value = "/bulkBooking", consumes = { "application/json" })
+	public ResponseEntity<?> createBulkBooking(@RequestBody List<Booking> booking) throws BookingAlreadyExistsException {
+		return ResponseEntity.status(HttpStatus.OK).body(bookingService.createBulkBooking(booking));
 	}
 //
 //	@PostMapping(value = "/update", consumes = { "application/json" })
