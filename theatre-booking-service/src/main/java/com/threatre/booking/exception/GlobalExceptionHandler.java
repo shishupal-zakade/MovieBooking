@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = BookingAlreadyExistsException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.CONFLICT)
 	public @ResponseBody ErrorResponse handleException(BookingAlreadyExistsException ex) {
-		return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+		return new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
 	}
 }

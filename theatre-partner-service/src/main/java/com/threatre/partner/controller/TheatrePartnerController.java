@@ -17,7 +17,7 @@ import com.threatre.partner.entity.Threatre;
 import com.threatre.partner.service.ThreatreService;
 
 @RestController
-@RequestMapping("/theatre")
+@RequestMapping("/theatre/partner")
 public class TheatrePartnerController {
 
 	@Autowired

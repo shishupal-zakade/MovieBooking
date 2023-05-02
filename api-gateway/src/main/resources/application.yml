@@ -1,0 +1,36 @@
+server:
+  port: 8060
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
+
+spring:
+  application:
+    name: api-gateway 
+  cloud:
+    gateway:
+      routes:
+      - id: theatre-show-service
+        uri: lb://theatre-show-service
+        predicates:
+        - Path=/theatre/show/**
+      - id: theatre-partner-service
+        uri: lb://theatre-partner-service
+        predicates:
+        - Path=/theatre/partner/**
+      - id: theatre-inventory-service
+        uri: lb://theatre-inventory-service
+        predicates:
+        - Path=/theatre/inventory/**
+      - id: theatre-customer-service
+        uri: lb://theatre-customer-service
+        predicates:
+        - Path=/theatre/customer/**
+      - id: theatre-booking-service
+        uri: lb://theatre-booking-service
+        predicates:
+        - Path=/theatre/booking/**

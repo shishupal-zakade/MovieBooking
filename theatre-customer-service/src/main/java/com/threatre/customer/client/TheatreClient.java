@@ -12,9 +12,9 @@ import com.threatre.customer.records.Theatre;
 @HttpExchange
 public interface TheatreClient {
 
-	@GetExchange("/findTheatres/{city}")
+	@GetExchange("/theatre/partner/findTheatres/{city}")
 	public List<Theatre> getByCityAndIds(@PathVariable String city, @RequestParam List<Integer> id);
 	
-	@GetExchange("/theatre/getByCity/{city}")
+	@GetExchange("/theatre/partner/getByCity/{city}")
 	public List<Theatre> getByCity(@PathVariable String city) ;
 }
