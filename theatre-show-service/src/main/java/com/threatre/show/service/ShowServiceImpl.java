@@ -50,5 +50,11 @@ public class ShowServiceImpl implements ShowService {
 		return repository.findAll();
 	}
 
+	@Override
+	public Show getShow(Integer id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id).get();
+	}
+
 	 
 }

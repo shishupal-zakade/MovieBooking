@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.boot.actuate.endpoint.Show;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +33,13 @@ public class Booking {
 	private Date date;
 
 	@Column(name = "show_id")
-	private String showId;
+	private Integer showId;
 
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "price")
+	private Double price;
 
 	@JdbcTypeCode(SqlTypes.JSON)
 	@Column(name = "seat_row_numbers")
@@ -45,8 +49,9 @@ public class Booking {
 		super();
 	}
 
-	public Booking(Integer id, String theatreId, String movieId, Date date, String showId, String status,
-			Map<String, Integer> seatRowNumbers) {
+
+	public Booking(Integer id, String theatreId, String movieId, Date date, Integer showId, String status, Double price,
+			Map<String, Integer> seatRowNumber) {
 		super();
 		this.id = id;
 		this.theatreId = theatreId;
@@ -54,7 +59,23 @@ public class Booking {
 		this.date = date;
 		this.showId = showId;
 		this.status = status;
-		this.seatRowNumber = seatRowNumbers;
+		this.price = price;
+		this.seatRowNumber = seatRowNumber;
+	}
+	
+	/**
+	 * @return the price
+	 */
+	public Double getPrice() {
+		return price;
+	}
+
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 
@@ -126,14 +147,14 @@ public class Booking {
 	/**
 	 * @return the showId
 	 */
-	public String getShowId() {
+	public Integer getShowId() {
 		return showId;
 	}
 
 	/**
 	 * @param showId the showId to set
 	 */
-	public void setShowId(String showId) {
+	public void setShowId(Integer showId) {
 		this.showId = showId;
 	}
 

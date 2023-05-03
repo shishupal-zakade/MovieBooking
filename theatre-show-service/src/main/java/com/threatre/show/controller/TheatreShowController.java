@@ -68,4 +68,9 @@ public class TheatreShowController {
 		return showService.findAll();
 	}
 	
+	@GetMapping("/getById")
+	public Show getShowById(@RequestParam Integer id) {
+		return showService.getShow(id);
+	}
+	
 }

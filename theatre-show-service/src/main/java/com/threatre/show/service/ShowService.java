@@ -23,4 +23,6 @@ public interface ShowService {
 
 	List<Show> findAll();
 
+	Show getShow( Integer id);
+
 }
