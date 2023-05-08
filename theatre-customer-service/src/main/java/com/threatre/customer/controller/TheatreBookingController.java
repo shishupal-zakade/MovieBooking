@@ -1,12 +1,9 @@
 package com.threatre.customer.controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +21,7 @@ public class TheatreBookingController {
 	CustomerService customerService;
 
 	@GetMapping(value = "/getTheatres")
-	public ResponseEntity<?> createBooking(@RequestParam String movieId, @RequestParam String city,
+	public ResponseEntity<?> getTheatresByMovieIdCity(@RequestParam String movieId, @RequestParam String city,
 			@RequestParam String date) {
 
 		Timestamp ts = Timestamp.valueOf(LocalDateTime.parse(date));
